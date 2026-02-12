@@ -1,7 +1,13 @@
-export const API_BASE = "http://localhost:8000";
+export const API_BASE =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 export async function fetchVoices() {
   const res = await fetch(`${API_BASE}/voices`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch voices");
+  }
+
   return res.json();
 }
 
@@ -19,8 +25,9 @@ export async function generatePronunciation(data: {
     body: JSON.stringify(data),
   });
 
-  if (!res.ok) throw new Error("Failed to generate");
+  if (!res.ok) {
+    throw new Error("Failed to generate pronunciation");
+  }
 
-  const blob = await res.blob();
-  return blob;
+  return await res.blob();
 }
