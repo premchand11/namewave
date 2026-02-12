@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+edge-tts
+slowapi
+SQLAlchemy
+psycopg2-binary
+python-dotenv
+tabulate
+pydantic
